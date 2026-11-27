@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف | رنا & مهاب 💍✨</title>
+  
+  <!-- Open Graph / Meta for Social Media Sharing (WhatsApp, Facebook, etc.) -->
+  <meta property="og:title" content="دعوة زفاف رنا & مهاب 💍 ٤ ديسمبر ٢٠٢٦">
+  <meta property="og:description" content="يتشرف مهاب ورنا بدعوتكم لمشاركتهم فرحة العمر بقاعة لورا - حديقة المدفعية">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#d4af37">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              100: '#FAF4E1',
+              200: '#F4E7BD',
+              300: '#EDD590',
+              400: '#E4BE5F',
+              500: '#D4AF37', /* Classic Wedding Gold */
+              600: '#B89225',
+              700: '#8E6E16',
+              800: '#644D0D',
+              900: '#3D2F05',
+            },
+            roseGold: {
+              100: '#FFF0F2',
+              200: '#FCE0E5',
+              300: '#F7C4CD',
+              400: '#EAA2B0',
+              500: '#D97D91',
+              600: '#BF5C72',
+            },
+            emeraldDark: '#0D2818',
+            warmIvory: '#FAF8F5',
+            softCream: '#FDFBF7'
+          },
+          fontFamily: {
+            amiri: ['Amiri', 'serif'],
+            alexandria: ['Alexandria', 'sans-serif'],
+            vibes: ['"Great Vibes"', 'cursive'],
+            ruqaa: ['"Reem Kufi"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FAF8F5] text-stone-800 font-alexandria antialiased selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden relative">
+
+  <!-- Background Petals Canvas -->
+  <canvas id="petals-canvas" class="fixed inset-0 pointer-events-none z-10 w-full h-full"></canvas>
+
+  <!-- ============================================== -->
+  <!-- 💌 LUXURY ENVELOPE / OPENING INVITATION MODAL -->
+  <!-- ============================================== -->
+  <div id="envelope-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/90 backdrop-blur-md transition-all duration-1000 p-4">
+    <div class="relative w-full max-w-lg bg-gradient-to-b from-[#FFFDF9] to-[#F5EFE6] rounded-3xl p-8 sm:p-10 shadow-2xl border-2 border-gold-300/80 text-center transform transition-all duration-700 animate-float">
+      
+      <!-- Top Floral Decorative Crown -->
+      <div class="flex justify-center items-center gap-3 mb-4 text-gold-500">
+        <i class="fa-solid fa-feather text-2xl transform -scale-x-100"></i>
+        <span class="text-xs tracking-widest uppercase text-stone-500 font-semibold">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</span>
+        <i class="fa-solid fa-feather text-2xl"></i>
+      </div>
+
+      <!-- Wax Seal Stamp Button -->
+      <div class="my-6 relative flex justify-center">
+        <div class="relative group cursor-pointer" id="open-envelope-btn" onclick="openInvitation()">
+          <!-- Glow effect -->
+          <div class="absolute -inset-2 bg-gradient-to-r from-gold-400 to-roseGold-400 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+          
+          <!-- Wax Seal Badge -->
+          <div class="relative w-28 h-28 rounded-full bg-gradient-to-tr from-gold-700 via-gold-500 to-amber-300 text-stone-900 flex flex-col items-center justify-center shadow-2xl border-4 border-[#fff1bd] transform group-hover:scale-105 active:scale-95 transition-all duration-300">
+            <i class="fa-solid fa-envelope-open-text text-2xl text-stone-900 mb-1"></i>
+            <span class="font-amiri font-bold text-lg text-stone-900 leading-tight">افتح الدعوة</span>
+            <span class="text-[10px] text-stone-800 font-bold uppercase tracking-wider">OPEN</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Names & Teaser -->
+      <h2 class="font-amiri text-3xl sm:text-4xl text-stone-800 mb-2 font-bold">
+        رنا <span class="text-gold-500 font-serif">&</span> مهاب
+      </h2>
+      <p class="text-stone-600 text-sm sm:text-base font-light mb-6">
+        يسعدنا ويشرفنا دعوتكم لحضور حفل زفافنا ومشاركتنا أجمل لحظات العمر
+      </p>
+
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-gold-100/70 border border-gold-300/60 rounded-full text-gold-800 text-xs sm:text-sm font-medium">
+        <i class="fa-regular fa-calendar-check text-gold-600"></i>
+        <span>الجمعة، ٤ ديسمبر ٢٠٢٦</span>
+      </div>
+
+      <!-- Skip / Direct Button -->
+      <div class="mt-6">
+        <button onclick="openInvitation()" class="text-xs text-stone-400 hover:text-gold-600 underline transition-colors">
+          تخطي المقدمة والدخول مباشرة للدعوة
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 🎶 FLOATING CONTROLS (MUSIC & QUICK LINKS) -->
+  <!-- ============================================== -->
+  <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <!-- Music Button -->
+    <button id="music-toggle" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-gold-400 text-gold-700 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group" title="تشغيل / كتم الموسيقى">
+      <i id="music-icon" class="fa-solid fa-music text-lg group-hover:rotate-12 transition-transform"></i>
+      <span class="music-wave" id="music-wave"></span>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-stone-200 text-stone-600 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all opacity-0 pointer-events-none" title="الرجوع للأعلى">
+      <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+  </div>
+
+  <!-- Quick Floating RSVP Anchor -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <a href="#rsvp" class="flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-gold-600 to-gold-500 text-white shadow-2xl hover:shadow-gold-500/40 hover:scale-105 active:scale-95 transition-all font-medium text-sm border border-gold-300">
+      <i class="fa-solid fa-envelope-circle-check text-base"></i>
+      <span class="hidden sm:inline">تأكيد الحضور</span>
+      <span class="sm:hidden">تأكيد</span>
+    </a>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 🌟 MAIN CONTENT CONTAINER -->
+  <!-- ============================================== -->
+  <main class="relative z-20 min-h-screen">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-4 py-16 overflow-hidden">
+      
+      <!-- Luxury Gold Corner Borders -->
+      <div class="corner-ornament top-4 right-4"></div>
+      <div class="corner-ornament top-4 left-4 -scale-x-100"></div>
+      <div class="corner-ornament bottom-4 right-4 -scale-y-100"></div>
+      <div class="corner-ornament bottom-4 left-4 -scale-100"></div>
+
+      <!-- Subtle background radial glow -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(244,231,189,0.35)_0%,_transparent_70%)] pointer-events-none"></div>
+
+      <!-- Quranic Ayah -->
+      <div class="max-w-2xl mx-auto mb-8 animate-fade-in">
+        <div class="w-16 h-1 bg-gold-400 mx-auto mb-6 rounded-full"></div>
+        <p class="font-amiri text-lg sm:text-2xl text-stone-700 leading-relaxed font-bold">
+          « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
+        </p>
+        <span class="text-xs text-stone-500 block mt-2 font-medium">[سورة الروم: ٢١]</span>
+      </div>
+
+      <!-- Heart Floral Emblem -->
+      <div class="my-3 flex items-center justify-center gap-4 text-gold-400">
+        <span class="w-12 sm:w-20 h-px bg-gradient-to-l from-gold-400 to-transparent"></span>
+        <div class="w-12 h-12 rounded-full border border-gold-300 flex items-center justify-center bg-white/70 shadow-inner">
+          <i class="fa-solid fa-heart text-roseGold-500 text-xl animate-pulse"></i>
+        </div>
+        <span class="w-12 sm:w-20 h-px bg-gradient-to-r from-gold-400 to-transparent"></span>
+      </div>
+
+      <!-- Announcement Header -->
+      <p class="text-gold-700 text-sm sm:text-lg font-semibold tracking-wide uppercase mt-2 mb-4">
+        دعوة لحضور حفل زفاف
+      </p>
+
+      <!-- The Couple's Names in Calligraphy Style -->
+      <div class="relative py-4 px-6 max-w-3xl mx-auto">
+        <h1 class="font-amiri text-5xl sm:text-7xl md:text-8xl font-black text-stone-900 tracking-tight leading-tight">
+          <span class="shimmer-gold inline-block">رنـــا</span>
+          <span class="text-gold-500 font-vibes text-4xl sm:text-6xl mx-3 font-normal">&</span>
+          <span class="shimmer-gold inline-block">مُـهـــاب</span>
+        </h1>
+      </div>
+
+      <p class="text-stone-600 max-w-xl text-base sm:text-xl font-light mt-4 mb-8 leading-relaxed">
+        تكتمل سعادتنا ويطيب لقاؤنا بوجودكم معنا في ليلة عمرنا
+      </p>
+
+      <!-- Date and Time Highlight Badge -->
+      <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-stone-700 text-sm sm:text-base font-medium bg-white/80 backdrop-blur-md px-6 py-4 rounded-2xl shadow-lg border border-gold-300/70 max-w-xl">
+        <div class="flex items-center gap-2">
+          <i class="fa-regular fa-calendar text-gold-600 text-lg"></i>
+          <span>الجمعة، ٤ ديسمبر ٢٠٢٦</span>
+        </div>
+        <span class="hidden sm:inline text-gold-400">•</span>
+        <div class="flex items-center gap-2">
+          <i class="fa-regular fa-clock text-gold-600 text-lg"></i>
+          <span>من ٧:٠٠ م إلى ١١:٠٠ م</span>
+        </div>
+        <span class="hidden sm:inline text-gold-400">•</span>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-location-dot text-gold-600 text-lg"></i>
+          <span>قاعة لورا - حديقة المدفعية</span>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#countdown-section" class="mt-12 text-gold-600 hover:text-gold-800 transition-colors animate-bounce flex flex-col items-center gap-1">
+        <span class="text-xs font-light">العد التنازلي والتفاصيل</span>
+        <i class="fa-solid fa-chevron-down text-sm"></i>
+      </a>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ⏳ COUNTDOWN TIMER SECTION -->
+    <!-- ============================================== -->
+    <section id="countdown-section" class="py-16 px-4 bg-gradient-to-b from-transparent via-gold-50/40 to-transparent relative">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-100 text-gold-800 text-xs sm:text-sm font-semibold mb-3 border border-gold-200">
+          <i class="fa-solid fa-hourglass-half text-gold-600"></i>
+          <span>العد التنازلي لليلتنا المميزة</span>
+        </div>
+        
+        <h2 class="font-amiri text-3xl sm:text-5xl font-bold text-stone-800 mb-3">
+          كم تبقّى على موعد الفرح؟
+        </h2>
+        <p class="text-stone-500 text-sm sm:text-base mb-10">
+          نحسب الساعات والدقائق بشوق لنلتقي بكم ونتشارك الفرحة سوياً
+        </p>
+
+        <!-- Timer Grid (4 Cards) -->
+        <div id="countdown-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
+          
+          <!-- Days -->
+          <div class="timer-box relative overflow-hidden bg-white/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl border border-gold-300 text-center transition-transform hover:-translate-y-1">
+            <div class="absolute -top-6 -right-6 w-16 h-16 bg-gold-100 rounded-full blur-xl pointer-events-none"></div>
+            <span id="timer-days" class="font-alexandria block text-4xl sm:text-6xl font-extrabold text-stone-900 tracking-tight">00</span>
+            <span class="text-gold-700 font-semibold text-xs sm:text-sm uppercase tracking-wider block mt-2">يـوم</span>
+          </div>
+
+          <!-- Hours -->
+          <div class="timer-box relative overflow-hidden bg-white/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl border border-gold-300 text-center transition-transform hover:-translate-y-1">
+            <div class="absolute -top-6 -right-6 w-16 h-16 bg-gold-100 rounded-full blur-xl pointer-events-none"></div>
+            <span id="timer-hours" class="font-alexandria block text-4xl sm:text-6xl font-extrabold text-stone-900 tracking-tight">00</span>
+            <span class="text-gold-700 font-semibold text-xs sm:text-sm uppercase tracking-wider block mt-2">سـاعة</span>
+          </div>
+
+          <!-- Minutes -->
+          <div class="timer-box relative overflow-hidden bg-white/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl border border-gold-300 text-center transition-transform hover:-translate-y-1">
+            <div class="absolute -top-6 -right-6 w-16 h-16 bg-gold-100 rounded-full blur-xl pointer-events-none"></div>
+            <span id="timer-minutes" class="font-alexandria block text-4xl sm:text-6xl font-extrabold text-stone-900 tracking-tight">00</span>
+            <span class="text-gold-700 font-semibold text-xs sm:text-sm uppercase tracking-wider block mt-2">دقيقـة</span>
+          </div>
+
+          <!-- Seconds -->
+          <div class="timer-box relative overflow-hidden bg-white/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl border border-gold-300 text-center transition-transform hover:-translate-y-1">
+            <div class="absolute -top-6 -right-6 w-16 h-16 bg-gold-100 rounded-full blur-xl pointer-events-none"></div>
+            <span id="timer-seconds" class="font-alexandria block text-4xl sm:text-6xl font-extrabold text-gold-600 tracking-tight">00</span>
+            <span class="text-gold-700 font-semibold text-xs sm:text-sm uppercase tracking-wider block mt-2">ثانيـة</span>
+          </div>
+
+        </div>
+
+        <!-- Timer Finished Banner (Hidden until time arrives) -->
+        <div id="timer-ended" class="hidden mt-8 p-6 bg-gradient-to-r from-gold-500 to-amber-500 text-white rounded-2xl shadow-2xl max-w-xl mx-auto">
+          <i class="fa-solid fa-champagne-glasses text-4xl mb-3"></i>
+          <h3 class="font-amiri text-3xl font-bold">حان وقت الاحتفال! 🎉</h3>
+          <p class="text-base mt-2">أهلاً وسهلاً بكم في حفل زفاف رنا & مهاب، ننتظركم الآن بكل حب وفرحة!</p>
+        </div>
+
+        <!-- Add to Calendar Quick Bar -->
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+          <button onclick="addToGoogleCalendar()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-gold-50 border border-gold-300 text-stone-800 rounded-xl shadow-sm hover:shadow transition-all text-sm font-medium">
+            <i class="fa-brands fa-google text-red-500"></i>
+            <span>إضافة إلى تقويم Google</span>
+          </button>
+          <button onclick="downloadICSFile()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-gold-50 border border-gold-300 text-stone-800 rounded-xl shadow-sm hover:shadow transition-all text-sm font-medium">
+            <i class="fa-brands fa-apple text-stone-800"></i>
+            <span>تقويم Apple / تحميل تذكير (.ics)</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 🏛️ EVENT DETAILS & VENUE CARDS -->
+    <!-- ============================================== -->
+    <section id="details" class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-gold-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">تفاصيل الحفل والمكان</span>
+          <h2 class="font-amiri text-3xl sm:text-5xl font-bold text-stone-900 mt-2 mb-4">
+            موعدنا ولقاؤنا المنتظر
+          </h2>
+          <div class="w-16 h-1 bg-gold-400 mx-auto rounded-full"></div>
+        </div>
+
+        <!-- 3 Luxury Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- Card 1: Time & Date -->
+          <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-stone-100 relative group overflow-hidden">
+            <div class="w-16 h-16 rounded-2xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-gold-500 group-hover:text-white transition-all duration-300">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <h3 class="font-amiri text-2xl font-bold text-stone-900 mb-2">التاريخ والتوقيت</h3>
+            <p class="text-stone-600 font-medium text-lg mb-1">الجمعة، ٤ ديسمبر ٢٠٢٦</p>
+            <p class="text-stone-500 text-sm mb-4">من الساعة ٧:٠٠ مساءً حتى ١١:٠٠ مساءً</p>
+            <div class="pt-4 border-t border-stone-100 text-xs text-stone-500 flex items-center gap-2">
+              <i class="fa-solid fa-bell text-gold-500"></i>
+              <span>نرجو تشريفنا في الموعد المحدد لبدء مراسم الفرح</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Venue Location -->
+          <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gold-400/80 relative group overflow-hidden bg-gradient-to-b from-white to-gold-50/20">
+            <span class="absolute top-4 left-4 bg-gold-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">القاعة</span>
+            <div class="w-16 h-16 rounded-2xl bg-gold-100 border border-gold-300 text-gold-700 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-gold-600 group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <h3 class="font-amiri text-2xl font-bold text-stone-900 mb-2">مكان الحفل</h3>
+            <p class="text-stone-800 font-semibold text-lg mb-1">قاعة لورا (Laura Venue)</p>
+            <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+              حديقة المدفعية، ممرات داخل الهيئة العربية، شيراتون المطار، قسم النزهة، القاهرة.
+            </p>
+            <div class="pt-4 border-t border-gold-200/60 flex flex-col gap-2">
+              <a href="https://www.google.com/maps/place/Laura+venue%D8%8C+%D9%85%D9%85%D8%B1%D8%A7%D8%AA+%D8%AF%D8%A7%D8%AE%D9%84+%D8%A7%D9%84%D9%87%D9%8A%D8%A6%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9%D8%8C+%D8%B4%D9%8A%D8%B1%D8%A7%D8%AA%D9%88%D9%86+%D8%A7%D9%84%D9%85%D8%B7%D8%A7%D8%B1%D8%8C+%D9%82%D8%B3%D9%85+%D8%A7%D9%84%D9%86%D8%B2%D9%87%D8%A9%D8%8C+%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9+%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%E2%80%AC%D8%8C,+Almazah%E2%80%AD/data=!4m2!3m1!1s0x14581703a05f0887:0x56b87cb2a8312b0c!18m1!1e1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-gold-600 hover:bg-gold-700 text-white rounded-xl text-xs sm:text-sm font-medium transition-colors shadow">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>الاتجاهات على الخريطة</span>
+              </a>
+              <button onclick="copyAddress()" class="inline-flex items-center justify-center gap-2 py-2 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-medium transition-colors">
+                <i class="fa-regular fa-copy"></i>
+                <span id="copy-text-btn">نسخ عنوان القاعة</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Dress Code & Etiquette -->
+          <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-stone-100 relative group overflow-hidden">
+            <div class="w-16 h-16 rounded-2xl bg-roseGold-100 border border-roseGold-200 text-roseGold-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-roseGold-500 group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-vest-patches"></i>
+            </div>
+            <h3 class="font-amiri text-2xl font-bold text-stone-900 mb-2">قواعد الأناقة (Dress Code)</h3>
+            <p class="text-stone-800 font-semibold text-lg mb-1">ملابس رسمية أنيقة (Formal)</p>
+            <p class="text-stone-500 text-sm mb-4 leading-relaxed">
+              يسعدنا أن تشاركونا بأناقتكم وابتسامتكم التي ستزيد حفلنا بهاءً وجمالاً.
+            </p>
+            <div class="pt-4 border-t border-stone-100 text-xs text-stone-500 flex items-center gap-2">
+              <i class="fa-solid fa-camera-retro text-gold-500"></i>
+              <span>شاركونا صوركم ولحظاتكم الجميلة معنا</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 🗺️ INTERACTIVE MAP SECTION -->
+    <!-- ============================================== -->
+    <section id="location-map" class="py-16 px-4 bg-stone-100/50">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-10">
+          <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-stone-900 mb-2">موقع قاعة لورا - حديقة المدفعية</h2>
+          <p class="text-stone-600 text-sm sm:text-base">يمكنكم الوصول للقاعة بسهولة عبر خرائط جوجل من خلال الخريطة التفاعلية بالأسفل</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-xl border border-stone-200">
+          <!-- Google Map Embed -->
+          <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-stone-200 relative">
+            <iframe 
+              src="https://maps.google.com/maps?q=Laura+venue,+ممرات+داخل+الهيئة+العربية،+شيراتون+المطار،+قسم+النزهة،+محافظة+القاهرة&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="خريطة قاعة لورا حديقة المدفعية">
+            </iframe>
+          </div>
+
+          <!-- Venue Perks / Guidance Notes -->
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div class="p-4 bg-gold-50/60 rounded-2xl border border-gold-200/60">
+              <i class="fa-solid fa-square-parking text-gold-600 text-xl mb-1"></i>
+              <h4 class="font-semibold text-stone-800 text-sm">مواقف سيارات متوفرة</h4>
+              <p class="text-stone-500 text-xs mt-1">توجد أماكن مخصصة لصف السيارات لراحة ضيوفنا</p>
+            </div>
+            <div class="p-4 bg-gold-50/60 rounded-2xl border border-gold-200/60">
+              <i class="fa-solid fa-tree text-gold-600 text-xl mb-1"></i>
+              <h4 class="font-semibold text-stone-800 text-sm">أجواء الحديقة الراقية</h4>
+              <p class="text-stone-500 text-xs mt-1">مدخل راقي وممرات مميزة داخل حديقة المدفعية</p>
+            </div>
+            <div class="p-4 bg-gold-50/60 rounded-2xl border border-gold-200/60">
+              <i class="fa-solid fa-route text-gold-600 text-xl mb-1"></i>
+              <h4 class="font-semibold text-stone-800 text-sm">سهولة الوصول</h4>
+              <p class="text-stone-500 text-xs mt-1">قريب من طريق النصر ومطار القاهرة ومصر الجديدة</p>
+            </div>
+          </div>
+
+          <!-- Direct Maps Launch Button -->
+          <div class="mt-6 text-center">
+            <a href="https://www.google.com/maps/place/Laura+venue%D8%8C+%D9%85%D9%85%D8%B1%D8%A7%D8%AA+%D8%AF%D8%A7%D8%AE%D9%84+%D8%A7%D9%84%D9%87%D9%8A%D8%A6%D8%A9+%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9%D8%8C+%D8%B4%D9%8A%D8%B1%D8%A7%D8%AA%D9%88%D9%86+%D8%A7%D9%84%D9%85%D8%B7%D8%A7%D8%B1%D8%8C+%D9%82%D8%B3%D9%85+%D8%A7%D9%84%D9%86%D8%B2%D9%87%D8%A9%D8%8C+%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9+%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%E2%80%AC%D8%8C,+Almazah%E2%80%AD/data=!4m2!3m1!1s0x14581703a05f0887:0x56b87cb2a8312b0c!18m1!1e1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 hover:bg-gold-700 text-white rounded-full text-sm font-medium transition-all shadow-md hover:scale-105">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>فتح الموقع مباشرة في تطبيق Google Maps</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 💌 RSVP (تأكيد الحضور) SECTION -->
+    <!-- ============================================== -->
+    <section id="rsvp" class="py-20 px-4 relative">
+      <div class="max-w-2xl mx-auto">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border-2 border-gold-300/80 relative overflow-hidden">
+          
+          <!-- Decorative Top Accent -->
+          <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-gold-400 via-amber-300 to-roseGold-400"></div>
+
+          <div class="text-center mb-8">
+            <span class="text-gold-600 font-semibold text-xs sm:text-sm uppercase tracking-wider">شاركونا الفرحة</span>
+            <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-stone-900 mt-2 mb-2">تأكيد الحضور (RSVP)</h2>
+            <p class="text-stone-500 text-sm">يسرنا معرفة حضوركم الكريم لترتيب استقبالكم بأفضل شكل</p>
+          </div>
+
+          <!-- RSVP Form -->
+          <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-5">
+            
+            <!-- Guest Name -->
+            <div>
+              <label for="guest-name" class="block text-stone-700 text-sm font-medium mb-1.5">
+                الاسم الكريم / العائلة <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <i class="fa-regular fa-user absolute right-3.5 top-3.5 text-stone-400"></i>
+                <input type="text" id="guest-name" required placeholder="مثال: أحمد مصطفى أو عائلة السيد..." class="w-full pr-10 pl-4 py-3 rounded-xl border border-stone-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition text-sm text-stone-800 bg-stone-50/50">
+              </div>
+            </div>
+
+            <!-- Attendance Choice -->
+            <div>
+              <label class="block text-stone-700 text-sm font-medium mb-2">هل ستشرفنا بالحضور؟ <span class="text-red-500">*</span></label>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="cursor-pointer">
+                  <input type="radio" name="attendance" value="حاضر" checked class="peer sr-only">
+                  <div class="p-3 text-center rounded-xl border border-stone-200 peer-checked:border-gold-500 peer-checked:bg-gold-50/70 peer-checked:text-gold-900 text-stone-700 text-sm font-medium transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-heart text-roseGold-500"></i>
+                    <span>بكل سرور سأحضر</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="attendance" value="معتذر" class="peer sr-only">
+                  <div class="p-3 text-center rounded-xl border border-stone-200 peer-checked:border-stone-500 peer-checked:bg-stone-100 peer-checked:text-stone-800 text-stone-600 text-sm font-medium transition flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-face-frown text-stone-400"></i>
+                    <span>أعتذر بكل أسف</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Guests Count -->
+            <div id="companions-wrapper">
+              <label for="guest-count" class="block text-stone-700 text-sm font-medium mb-1.5">عدد الحضور (مع المرافقين)</label>
+              <div class="relative">
+                <i class="fa-solid fa-user-group absolute right-3.5 top-3.5 text-stone-400"></i>
+                <select id="guest-count" class="w-full pr-10 pl-4 py-3 rounded-xl border border-stone-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition text-sm text-stone-800 bg-stone-50/50">
+                  <option value="1">شخص واحد (أنا فقط)</option>
+                  <option value="2" selected>شخصين (٢)</option>
+                  <option value="3">٣ أفراد</option>
+                  <option value="4">٤ أفراد</option>
+                  <option value="5+">عائلة (٥ أفراد أو أكثر)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Congratulations Message -->
+            <div>
+              <label for="guest-message" class="block text-stone-700 text-sm font-medium mb-1.5">كلمة تهنئة لرنا ومهاب (اختياري)</label>
+              <textarea id="guest-message" rows="3" placeholder="اكتب مباركتك ودعواتك للعروسين هنا..." class="w-full p-3 rounded-xl border border-stone-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none transition text-sm text-stone-800 bg-stone-50/50"></textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+              <button type="submit" class="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold-600 via-gold-500 to-amber-500 hover:from-gold-700 hover:to-amber-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all transform active:scale-98 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>تأكيد الحضور والحفظ</span>
+              </button>
+              
+              <button type="button" onclick="sendRSVPViaWhatsApp()" class="py-3.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm transition-all shadow flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>إرسال عبر واتساب</span>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Success VIP Confirmation Card (Hidden by default) -->
+          <div id="rsvp-success" class="hidden mt-6 p-6 rounded-2xl bg-gradient-to-br from-gold-50 to-amber-50 border border-gold-300 text-center animate-fade-in">
+            <div class="w-14 h-14 bg-gold-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow">
+              <i class="fa-solid fa-check text-2xl"></i>
+            </div>
+            <h4 class="font-amiri text-2xl font-bold text-stone-900">تم تسجيل حضوركم بنجاح! 💖</h4>
+            <p id="rsvp-guest-summary" class="text-stone-700 text-sm mt-1 mb-4"></p>
+            
+            <div class="p-3 bg-white/80 rounded-xl border border-gold-200 inline-block text-xs text-stone-600">
+              <i class="fa-solid fa-heart text-roseGold-500"></i>
+              <span>ننتظر تشريفكم لنا يوم الجمعة ٤ ديسمبر ٢٠٢٦ بقاعة لورا</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 💬 WISHES GUESTBOOK (دفتر التهاني والتبريكات) -->
+    <!-- ============================================== -->
+    <section id="guestbook" class="py-16 px-4 bg-stone-100/50">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="text-gold-600 font-semibold text-xs sm:text-sm uppercase tracking-wider">كلمات من القلب</span>
+          <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-stone-900 mt-2 mb-2">دفتر تهاني وتبريكات الأحباب</h2>
+          <p class="text-stone-500 text-sm">دعواتكم ومشاعركم الصادقة هي أجمل هدية لرنا & مهاب</p>
+        </div>
+
+        <!-- Wishes List Grid -->
+        <div id="wishes-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dynamically populated by JS & defaults -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 📸 PHOTO GALLERY / MEMORIES PLACEHOLDER -->
+    <!-- ============================================== -->
+    <section id="gallery" class="py-16 px-4">
+      <div class="max-w-5xl mx-auto text-center">
+        <span class="text-gold-600 font-semibold text-xs sm:text-sm uppercase tracking-wider">لحظات لا تُنسى</span>
+        <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-stone-900 mt-2 mb-10">ذكريات تجمعنا</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          
+          <div class="polaroid-card group">
+            <div class="overflow-hidden rounded-xl bg-stone-100 aspect-[4/5] relative flex items-center justify-center border border-stone-200 shadow-sm">
+              <div class="text-center p-6">
+                <i class="fa-regular fa-gem text-4xl text-gold-400 mb-3"></i>
+                <h4 class="font-amiri text-xl font-bold text-stone-800">البداية الجميلة</h4>
+                <p class="text-xs text-stone-500 mt-1">حيث اجتمعت القلوب على المودة والرحمة</p>
+              </div>
+            </div>
+            <p class="font-amiri text-stone-700 mt-3 text-sm font-medium">رنا & مهاب 💍</p>
+          </div>
+
+          <div class="polaroid-card group">
+            <div class="overflow-hidden rounded-xl bg-gradient-to-tr from-gold-100 to-roseGold-100 aspect-[4/5] relative flex items-center justify-center border border-gold-300 shadow-md">
+              <div class="text-center p-6">
+                <i class="fa-solid fa-heart text-4xl text-roseGold-500 mb-3 animate-pulse"></i>
+                <h4 class="font-amiri text-2xl font-bold text-stone-900">٤ ديسمبر ٢٠٢٦</h4>
+                <p class="text-xs text-stone-600 mt-2">موعدنا مع ليلة العمر بقاعة لورا</p>
+              </div>
+            </div>
+            <p class="font-amiri text-stone-700 mt-3 text-sm font-medium">فرحة العمر ✨</p>
+          </div>
+
+          <div class="polaroid-card group">
+            <div class="overflow-hidden rounded-xl bg-stone-100 aspect-[4/5] relative flex items-center justify-center border border-stone-200 shadow-sm">
+              <div class="text-center p-6">
+                <i class="fa-solid fa-champagne-glasses text-4xl text-gold-400 mb-3"></i>
+                <h4 class="font-amiri text-xl font-bold text-stone-800">حضوركم يكمل الفرح</h4>
+                <p class="text-xs text-stone-500 mt-1">ننتظر مشاركتكم بكل حب وامتنان</p>
+              </div>
+            </div>
+            <p class="font-amiri text-stone-700 mt-3 text-sm font-medium">معاً للأبد 🤍</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 🌹 FOOTER -->
+    <!-- ============================================== -->
+    <footer class="py-12 px-4 border-t border-stone-200/70 text-center bg-white/50 relative">
+      <div class="max-w-xl mx-auto space-y-4">
+        <h3 class="font-amiri text-3xl font-bold text-stone-900">
+          رنـا <span class="text-gold-500">&</span> مُـهـاب
+        </h3>
+        <p class="text-stone-500 text-sm">
+          شكراً لوجودكم دائماً في تفاصيل حياتنا، نلقاكم على خير وسعادة في ٤ ديسمبر ٢٠٢٦!
+        </p>
+        <div class="flex justify-center items-center gap-4 text-gold-500 text-lg">
+          <i class="fa-solid fa-ring"></i>
+          <span>•</span>
+          <i class="fa-solid fa-heart text-roseGold-500"></i>
+          <span>•</span>
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+        <p class="text-[11px] text-stone-400">
+          صُنعت بكل حب وفرحة بمناسبة زفاف رنا & مهاب
+        </p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Notification Toast Container -->
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-5 py-3 rounded-full text-xs sm:text-sm shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300">
+    <i class="fa-solid fa-circle-check text-gold-400"></i>
+    <span id="toast-message">تم النسخ بنجاح</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
