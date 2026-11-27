@@ -47,7 +47,7 @@
 
 #### الطريقة الثانية (عبر السيرفر المحلي):
 ```bash
-node server.js
+node local-server.js
 ```
 ثم افتح الرابط في المتصفح:
 👉 `http://localhost:3000`
