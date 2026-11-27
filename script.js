@@ -98,92 +98,64 @@ function openInvitation() {
 }
 
 // ==========================================
-// 🎶 3. AUDIO SYNTHESIZER & MUSIC CONTROLLER
+// 🎶 3. AUDIO PLAYER & MUSIC CONTROLLER
 // ==========================================
-let audioCtx = null;
+let audioPlayer = null;
 let isPlayingAudio = false;
-let audioInterval = null;
 
-// Relaxing romantic arpeggiated piano chords in A Major / F# Minor
-const ROMANTIC_CHORDS = [
-  [440, 554.37, 659.25, 880], // A Major (A4, C#5, E5, A5)
-  [369.99, 440, 554.37, 739.99], // F# Minor (F#4, A4, C#5, F#5)
-  [493.88, 587.33, 739.99, 987.77], // B Minor (B4, D5, F#5, B5)
-  [329.63, 415.30, 493.88, 659.25]  // E Major (E4, G#4, B4, E5)
-];
+function initAudioPlayer() {
+  if (!audioPlayer) {
+    audioPlayer = document.getElementById('wedding-audio');
+    if (!audioPlayer) {
+      audioPlayer = new Audio('wedding-song.mp3');
+      audioPlayer.loop = true;
+    }
 
-function playSoftNote(freq, time, duration = 2.2) {
-  if (!audioCtx) return;
-  try {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, time);
-
-    // Warm envelope
-    gain.gain.setValueAtTime(0, time);
-    gain.gain.linearRampToValueAtTime(0.04, time + 0.15);
-    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start(time);
-    osc.stop(time + duration);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-function playChordProgression() {
-  if (!isPlayingAudio || !audioCtx) return;
-  const now = audioCtx.currentTime;
-  let chordIndex = 0;
-
-  function scheduleNextChord() {
-    if (!isPlayingAudio || !audioCtx) return;
-    const chord = ROMANTIC_CHORDS[chordIndex % ROMANTIC_CHORDS.length];
-    const baseTime = audioCtx.currentTime;
-
-    // Arpeggiate chord gently
-    chord.forEach((freq, idx) => {
-      playSoftNote(freq, baseTime + idx * 0.45, 2.5);
+    audioPlayer.addEventListener('play', () => {
+      isPlayingAudio = true;
+      updateAudioUI(true);
     });
 
-    chordIndex++;
-    audioInterval = setTimeout(scheduleNextChord, 2400);
-  }
+    audioPlayer.addEventListener('pause', () => {
+      isPlayingAudio = false;
+      updateAudioUI(false);
+    });
 
-  scheduleNextChord();
+    audioPlayer.addEventListener('ended', () => {
+      isPlayingAudio = false;
+      updateAudioUI(false);
+    });
+  }
+  return audioPlayer;
 }
 
 function startRomanticAudio() {
-  try {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    isPlayingAudio = true;
-    updateAudioUI(true);
-    playChordProgression();
-  } catch (err) {
-    console.warn("Audio autoplay blocked or unsupported:", err);
+  const player = initAudioPlayer();
+  if (player) {
+    player.play().then(() => {
+      isPlayingAudio = true;
+      updateAudioUI(true);
+    }).catch(err => {
+      console.warn("Autoplay prevented by browser, waiting for user click:", err);
+      updateAudioUI(false);
+    });
   }
 }
 
 function toggleAudio() {
-  if (!isPlayingAudio) {
-    startRomanticAudio();
+  const player = initAudioPlayer();
+  if (!player) return;
+
+  if (player.paused) {
+    player.play().then(() => {
+      isPlayingAudio = true;
+      updateAudioUI(true);
+    }).catch(err => {
+      console.error("Playback error:", err);
+    });
   } else {
+    player.pause();
     isPlayingAudio = false;
-    if (audioInterval) clearTimeout(audioInterval);
-    if (audioCtx && audioCtx.state === 'running') {
-      audioCtx.suspend();
-    }
     updateAudioUI(false);
   }
 }
@@ -192,7 +164,7 @@ function updateAudioUI(playing) {
   const icon = document.getElementById('music-icon');
   const wave = document.getElementById('music-wave');
   if (playing) {
-    if (icon) icon.className = 'fa-solid fa-volume-high text-lg text-gold-600';
+    if (icon) icon.className = 'fa-solid fa-volume-high text-lg text-gold-600 animate-pulse';
     if (wave) wave.classList.add('active');
   } else {
     if (icon) icon.className = 'fa-solid fa-volume-xmark text-lg text-stone-400';
